@@ -1,0 +1,30 @@
+#include <Servo.h>
+Servo tray;
+int angle = 90;
+const int DEADBAND = 30;
+
+void setup() {
+  tray.attach(9);
+  tray.write(angle);
+  Serial.begin(9600);
+
+}
+
+void loop() {
+ int left = analogRead(A0);
+ int right = analogRead(A1);
+ int diff = left - right;
+
+ Serial.print(left);
+ Serial.print("\t");
+ Serial.println(right);
+ Serial.print("\t");
+ Serial.println(diff);
+
+ if(diff > DEADBAND) angle--;
+ else if (diff < -DEADBAND) angle++;
+
+ angle = constrain(angle, 0, 180);
+ tray.write(angle);
+ delay(400);
+}
