@@ -1,0 +1,15 @@
+#include <Servo.h>
+Servo tray;
+
+void setup() {
+  tray.attach(9);
+
+}
+
+void loop() {
+  tray.write(0);
+  delay(400);
+  tray.write(180);
+  delay(400);
+
+}
